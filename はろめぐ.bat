@@ -1,29 +1,28 @@
 @echo off
 
-rem ŠeíƒpƒX¶¬
+rem å„ç¨®ãƒ‘ã‚¹ç”Ÿæˆ
 set path=%~p0
 set vbsFile=%path%msgbox.vbs
 set wavPath=%path%shutdown.wav
-set playTime=5000
 
-rem Šù‚Évbs‚ª‘¶İ‚µ‚½ê‡‚Éíœ‚·‚é
+rem æ—¢ã«vbsãŒå­˜åœ¨ã—ãŸå ´åˆã«å‰Šé™¤ã™ã‚‹
 if exist "%vbsFile%" (
 	del /f "%vbsFile%"
 )
 
-rem vbs¶¬
-echo Dim answer >> %vbsFile%
-echo answer = msgbox("ƒVƒƒƒbƒgƒ_ƒEƒ“‚·‚éH",vbYesNo + vbInformation,"“¡“‡œ") >> "%vbsFile%"
+rem vbsç”Ÿæˆ
+echo Dim answer >> "%vbsFile%"
+echo answer = msgbox("ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³ã™ã‚‹ï¼Ÿ",vbYesNo + vbInformation,"è—¤å³¶æ…ˆ") >> "%vbsFile%"
 echo WScript.Quit(answer) >> "%vbsFile%"
 
-rem vbsÀs
+rem vbså®Ÿè¡Œ
 start /b %wavPath%
 "%vbsFile%"
 
-rem vbsÀsŒ‹‰ÊŠm”F
-if %errorlevel% == 1 (
-	shutdown.exe /s /t 0
+rem vbså®Ÿè¡Œçµæœç¢ºèª
+if %ERRORLEVEL% equ 6 (
+	start shutdown.exe /s /t 0
 )
 
-rem vbsíœ
+rem vbså‰Šé™¤
 del /f "%vbsFile%"
